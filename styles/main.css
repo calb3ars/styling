@@ -114,7 +114,7 @@ h2 {
   background: url("https://www.brandsoftheworld.com/sites/default/files/styles/logo-thumbnail/public/0024/6465/brand.gif?itok=WXRZKWKU");
   background-repeat: no-repeat;
   background-position: center center;
-  height: 100px;
+  height: 130px;
 }
 
 .id-card {
@@ -127,13 +127,17 @@ h2 {
   display: flex;
   flex-direction: column;
   padding: 10px;
-  height: 250px;
+  height: 260px;
 }
 
 .employee {
   display: flex;
   flex-direction: row;
   padding: 15px;
+}
+
+.employee-photo {
+  margin-bottom: 25px;
 }
 
 .bio {
