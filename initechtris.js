@@ -7,7 +7,6 @@
 // refactor
 //   collide
 //   create and draw methods
-// filledRow method
 // reorder pieces and numbers used
 //
 // Tuesday Night/Wednesday Morning
@@ -27,46 +26,46 @@ const context = canvas.getContext('2d');
 
 context.scale(20, 20);
 
-// function filledRow() {
-//     let rowCount = 1;
-//     outer: for (let y = board.length -1; y > 0; --y) {
-//         for (let x = 0; x < board[y].length; ++x) {
-//             if (board[y][x] === 0) {
-//                 continue outer;
-//             }
-//         }
-//
-//         const row = board.splice(y, 1)[0].fill(0);
-//         board.unshift(row);
-//         ++y;
-//
-//         this.score += rowCount * 10;
-//         rowCount *= 2;
-//     }
-// }
+function boardSweep() {
+    let rowCount = 1;
+    outer: for (let y = board.length -1; y > 0; --y) {
+        for (let x = 0; x < board[y].length; ++x) {
+            if (board[y][x] === 0) {
+                continue outer;
+            }
+        }
 
-// function collide(board, piece) {
-//     const m = piece.matrix;
-//     const o = piece.pos;
-//     for (let y = 0; y < m.length; ++y) {
-//         for (let x = 0; x < m[y].length; ++x) {
-//             if (m[y][x] !== 0 &&
-//                (board[y + o.y] &&
-//                 board[y + o.y][x + o.x]) !== 0) {
-//                 return true;
-//             }
-//         }
-//     }
-//     return false;
-// }
-//
-// function createMatrix(w, h) {
-//     const matrix = [];
-//     while (h--) {
-//         matrix.push(new Array(w).fill(0));
-//     }
-//     return matrix;
-// }
+        const row = board.splice(y, 1)[0].fill(0);
+        board.unshift(row);
+        ++y;
+
+        this.score += rowCount * 10;
+        rowCount *= 2;
+    }
+}
+
+function collide(board, piece) {
+    const m = piece.matrix;
+    const o = piece.pos;
+    for (let y = 0; y < m.length; ++y) {
+        for (let x = 0; x < m[y].length; ++x) {
+            if (m[y][x] !== 0 &&
+               (board[y + o.y] &&
+                board[y + o.y][x + o.x]) !== 0) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+function createMatrix(w, h) {
+    const matrix = [];
+    while (h--) {
+        matrix.push(new Array(w).fill(0));
+    }
+    return matrix;
+}
 
 function createPiece(type)
 {
@@ -147,60 +146,20 @@ function merge(board, piece) {
     });
 }
 
-// function rotate(matrix) {
-//     for (let y = 0; y < matrix.length; ++y) {
-//         for (let x = 0; x < y; ++x) {
-//             [
-//                 matrix[x][y],
-//                 matrix[y][x],
-//             ] = [
-//                 matrix[y][x],
-//                 matrix[x][y],
-//             ];
-//         }
-//     }
-//     return matrix;
-// }
-//     if (dir > 0) {
-//         matrix.forEach(row => row.reverse());
-//     } else {
-//         matrix.reverse();
-//     }
-// }
-
-// function pieceDrop() {
-//     piece.pos.y++;
+// function pieceReset() {
+//     const pieces = 'TJLOSZI';
+//     piece.matrix = createPiece(pieces[pieces.length * Math.random() | 0]);
+//     piece.pos.y = 0;
+//     piece.pos.x = (board[0].length / 2 | 0) -
+//                    (piece.matrix[0].length / 2 | 0);
+//
+//
 //     if (collide(board, piece)) {
-//         piece.pos.y--;
-//         merge(board, piece);
-//         pieceReset();
-//         board.filledRow();
+//         board.forEach(row => row.fill(0));
+//         this.score = 0;
 //         updateScore();
 //     }
-//     dropCounter = 0;
 // }
-
-// function pieceMove(offset) {
-//     piece.pos.x += offset;
-//     if (collide(board, piece)) {
-//         piece.pos.x -= offset;
-//     }
-// }
-
-function pieceReset() {
-    const pieces = 'TJLOSZI';
-    piece.matrix = createPiece(pieces[pieces.length * Math.random() | 0]);
-    piece.pos.y = 0;
-    piece.pos.x = (board[0].length / 2 | 0) -
-                   (piece.matrix[0].length / 2 | 0);
-
-
-    if (collide(board, piece)) {
-        board.forEach(row => row.fill(0));
-        this.score = 0;
-        updateScore();
-    }
-}
 
 
 
@@ -213,8 +172,8 @@ function gameover(board){
     }
   }
   return false;
-};
-
+}
+//
 // function resetBoard() {
 //   board.forEach(row => row.fill(0));
 // }
@@ -273,10 +232,10 @@ const colors = [
     '#D34E24',
 ];
 
-const board = new Board(12, 20);
+const board = createMatrix(12, 20);
 
 const piece = new Piece;
 
-pieceReset();
+piece.place();
 updateScore();
 update();
