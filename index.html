@@ -1,26 +1,51 @@
 <html>
 <head>
-    <title>Tetris</title>
-    <style>
-      body {
-        background: #202028;
-        color: #fff;
-        font-family: sans-serif;
-        font-size: 2em;
-        text-align: center;
-      }
-      canvas {
-        border: solid .2em #fff;
-        height: 90vh;
-      }
-    </style>
+    <title>Initechtris</title>
+    <link rel="stylesheet" href="styles/reset.css"></link>
+    <link rel="stylesheet" href="styles/main.css"></link>
+    <link href="https://fonts.googleapis.com/css?family=Damion|Montserrat:400,700i" rel="stylesheet">
 </head>
 <body>
-    <div id="score"></div>
-    <canvas id="tetris" width="240" height="400" />
-    <script src="board.js"></script>
+
+  <div class="game">
+    <div class="sponsor-window">
+      <div class="initechtris">Initechtris</div>
+      <p>sponsored by <span class="initech">Initech</span></p>
+      <p><span class="tagline">now featuring covers on our </span>TPS Reports!</p>
+    </div>
+    <div class="game-window">
+      <canvas id="tetris" width="240" height="400" />
+    </div>
+
+    <div class="game-panel">
+      <div id="score"></div>
+      <h2>Controls</h2>
+        <ul>
+          <li>Left : <span class="arrow">&#9664;</span></li>
+          <li>Right : <span class="arrow">&#9654;</span></li>
+          <li>Step Drop : <span class="arrow">&#9660;</span></li>
+          <li>Rotate : <span class="space">Spacebar</span></li>
+        </ul>
+
+      <div class="id-card">
+        <div class="header-logo"></div>
+        <div class="employee">
+          <img src="http://vignette4.wikia.nocookie.net/uncyclopedia/images/4/48/MiltonStapler.jpg/revision/latest?cb=20101026223646" height="150px" alt="milton"/>
+          <div class="bio">
+            <div class-"employee-name">Milton Waddams</div>
+            <div class="employee-role">Collator</div>
+            <div clas="employee-dept">Basement Level</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    <script src="lib/bundle.js"></script>
+    <!-- <script src="board.js"></script>
     <script src="piece.js"></script>
     <script src="game.js"></script>
-    <script src="initechtris.js"></script>
+    <script src="initechtris.js"></script> -->
 </body>
 </html>
